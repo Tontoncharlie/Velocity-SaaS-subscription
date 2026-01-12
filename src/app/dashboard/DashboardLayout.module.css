@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: var(--background);
+}
+
+.main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 2rem;
+    transition: margin-left 0.3s ease-in-out;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding: 4rem 1rem 2rem 1rem;
+        /* Top padding to account for fixed toggle */
+    }
+}

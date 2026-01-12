@@ -1,0 +1,124 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem 2.5rem;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logoIcon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 8px;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.links a {
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.links a:hover {
+    color: white;
+}
+
+
+/* ... existing styles ... */
+
+.desktopAuth {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.mobileAuth {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.mobileToggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .mobileToggle {
+        display: block;
+    }
+
+    .desktopAuth {
+        display: none;
+    }
+
+    .links {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        font-size: 1.5rem;
+    }
+
+    .links.active {
+        display: flex;
+    }
+
+    .mobileAuth {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Style links inside mobile menu */
+    .links a {
+        color: white;
+        font-weight: 700;
+        padding: 1rem;
+    }
+}
