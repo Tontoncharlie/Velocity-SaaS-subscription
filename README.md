@@ -8,12 +8,12 @@ A modern, full-stack SaaS subscription management platform with premium UI desig
 
 ## Features
 
-- 🔐 **User Authentication** - Sign up, login, and secure sessions via Supabase
-- 💳 **Subscription Billing** - Integrated Paystack payments for Pro & Enterprise plans
-- 📊 **User Dashboard** - Track usage, plan status, and account settings
-- 👤 **Admin Panel** - Business metrics and user management
-- 🎨 **Premium UI** - Glassmorphism design with smooth animations
-- 📱 **Fully Responsive** - Works on desktop, tablet, and mobile
+-  **User Authentication** - Sign up, login, and secure sessions via Supabase
+-  **Subscription Billing** - Integrated Paystack payments for Pro & Enterprise plans
+-  **User Dashboard** - Track usage, plan status, and account settings
+-  **Admin Panel** - Business metrics and user management
+-  **Premium UI** - Glassmorphism design with smooth animations
+-  **Fully Responsive** - Works on desktop, tablet, and mobile
 
 ## Tech Stack
 
