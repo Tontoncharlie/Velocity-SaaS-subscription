@@ -22,33 +22,39 @@ export async function POST(req) {
     const event = JSON.parse(body);
 
     // Handle the event
+    switch (event.event) {
         case 'charge.success':
-    const data = event.data;
-    console.log('Payment successful for:', data.customer.email, 'Reference:', data.reference);
+            const data = event.data;
+            console.log('Payment successful for:', data.customer.email, 'Reference:', data.reference);
 
-    // Create Supabase Admin Client for server-side updates
-    const supabaseAdmin = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
+            // Determine plan based on amount
+            const amount = data.amount; // in kobo
+            let plan = 'Pro';
+            if (amount >= 990000) { // 9,900 NGN
+                plan = 'Enterprise';
+            }
 
-    // Update user subscription status in Supabase database
-    // We assume the email in Paystack matches the user's email
-    // First find the user ID by email if needed, or update by email if email is unique in profiles
-    const { error: updateError } = await supabaseAdmin
-        .from('profiles')
-        .update({ plan: 'Pro', status: 'Active' })
-        .eq('email', data.customer.email);
+            // Create Supabase Admin Client for server-side updates
+            const supabaseAdmin = createClient(
+                process.env.NEXT_PUBLIC_SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+            );
 
-    if (updateError) {
-        console.error('Failed to update profile subscription:', updateError);
-    } else {
-        console.log('Profile subscription updated to Pro for:', data.customer.email);
-    }
-    break;
+            // Update user subscription status in Supabase database
+            const { error: updateError } = await supabaseAdmin
+                .from('profiles')
+                .update({ plan: plan, status: 'Active' })
+                .eq('email', data.customer.email);
+
+            if (updateError) {
+                console.error('Failed to update profile subscription:', updateError);
+            } else {
+                console.log(`Profile subscription updated to ${plan} for:`, data.customer.email);
+            }
+            break;
         default:
-    console.log(`Unhandled event type ${event.event}`);
-}
+            console.log(`Unhandled event type ${event.event}`);
+    }
 
-return NextResponse.json({ received: true });
+    return NextResponse.json({ received: true });
 }
